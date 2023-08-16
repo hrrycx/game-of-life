@@ -36,12 +36,14 @@
             reset = new Button();
             speed = new Button();
             display = new PictureBox();
+            timer2 = new System.Windows.Forms.Timer(components);
+            slow = new Button();
             ((System.ComponentModel.ISupportInitialize)display).BeginInit();
             SuspendLayout();
             // 
             // init
             // 
-            init.Location = new Point(1026, 15);
+            init.Location = new Point(818, 12);
             init.Name = "init";
             init.Size = new Size(175, 23);
             init.TabIndex = 1;
@@ -51,7 +53,7 @@
             // 
             // start
             // 
-            start.Location = new Point(1026, 152);
+            start.Location = new Point(818, 149);
             start.Name = "start";
             start.Size = new Size(112, 23);
             start.TabIndex = 2;
@@ -65,7 +67,7 @@
             // 
             // stop
             // 
-            stop.Location = new Point(1026, 181);
+            stop.Location = new Point(818, 178);
             stop.Name = "stop";
             stop.Size = new Size(112, 23);
             stop.TabIndex = 3;
@@ -75,7 +77,7 @@
             // 
             // reset
             // 
-            reset.Location = new Point(1026, 44);
+            reset.Location = new Point(818, 41);
             reset.Name = "reset";
             reset.Size = new Size(75, 23);
             reset.TabIndex = 4;
@@ -85,7 +87,7 @@
             // 
             // speed
             // 
-            speed.Location = new Point(1026, 210);
+            speed.Location = new Point(818, 207);
             speed.Name = "speed";
             speed.Size = new Size(75, 23);
             speed.TabIndex = 5;
@@ -97,16 +99,32 @@
             // 
             display.Location = new Point(12, 12);
             display.Name = "display";
-            display.Size = new Size(1000, 1000);
+            display.Size = new Size(800, 800);
             display.TabIndex = 6;
             display.TabStop = false;
-            display.Click += display_Click;
+            display.MouseDown += display_MouseDown;
+            display.MouseUp += display_MouseUp;
+            // 
+            // timer2
+            // 
+            timer2.Tick += timer2_Tick;
+            // 
+            // slow
+            // 
+            slow.Location = new Point(818, 236);
+            slow.Name = "slow";
+            slow.Size = new Size(75, 23);
+            slow.TabIndex = 7;
+            slow.Text = "slow down";
+            slow.UseVisualStyleBackColor = true;
+            slow.Click += slow_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1431, 604);
+            Controls.Add(slow);
             Controls.Add(display);
             Controls.Add(speed);
             Controls.Add(reset);
@@ -128,5 +146,7 @@
         private Button reset;
         private Button speed;
         private PictureBox display;
+        private System.Windows.Forms.Timer timer2;
+        private Button slow;
     }
 }

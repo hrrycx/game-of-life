@@ -4,7 +4,8 @@ using System.Threading;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace game_of_life { 
+namespace game_of_life
+{
 
     public partial class Form1 : Form
     {
@@ -32,6 +33,8 @@ namespace game_of_life {
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+            timer2.Interval = 1;
+            timer2.Enabled = false;
             Random rnd = new Random();
             for (int i = 0; i < 100; i++)
             {
@@ -189,15 +192,33 @@ namespace game_of_life {
 
             }
         }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (timer1.Enabled == true) { return; }
 
-        private void display_Click(object sender, EventArgs e)
+            var coordinates = display.PointToClient(Cursor.Position);
+            grid[(coordinates.X) / 8, (coordinates.Y) / 8] = true;
+            showgrid();
+        }
+
+        private void display_MouseDown(object sender, MouseEventArgs e)
         {
             if (timer1.Enabled == true) { return; }
 
             var coordinates = display.PointToClient(Cursor.Position);
             grid[(coordinates.X) / 8, (coordinates.Y) / 8] = !grid[(coordinates.X) / 8, (coordinates.Y) / 8];
             showgrid();
+            timer2.Enabled = true;
         }
-        // DRAG 
+
+        private void display_MouseUp(object sender, MouseEventArgs e)
+        {
+            timer2.Enabled = false;
+        }
+
+        private void slow_Click(object sender, EventArgs e)
+        {
+            timer1.Interval *= 2;
+        }
     }
 }
